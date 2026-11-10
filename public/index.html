@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Трекер чтения книг</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header class="header">
+        <h1>📚 Трекер чтения</h1>
+        <button id="addBtn" class="btn btn-primary" type="button">+ Добавить запись</button>
+    </header>
+
+    <nav class="tabs" aria-label="Разделы">
+        <button class="tab active" data-tab="logs" type="button">Записи</button>
+        <button class="tab" data-tab="stats" type="button">Статистика</button>
+    </nav>
+
+    <main>
+        <section id="logsTab" class="tab-panel active">
+            <div class="filters">
+                <label>
+                    Период:
+                    <select id="periodSelect">
+                        <option value="all">Все время</option>
+                        <option value="week">Последняя неделя</option>
+                        <option value="month">Последний месяц</option>
+                    </select>
+                </label>
+            </div>
+            <div id="logsList" class="logs-list" aria-live="polite"></div>
+        </section>
+
+        <section id="statsTab" class="tab-panel">
+            <div class="stats-header">
+                <p>Всего страниц за период: <strong id="totalPages">0</strong></p>
+            </div>
+            <h2>Прогресс по книгам</h2>
+            <div id="progressList" class="progress-list"></div>
+            <h2>Календарь чтения (текущий месяц)</h2>
+            <div id="calendar" class="calendar" aria-label="Календарь чтения"></div>
+        </section>
+    </main>
+
+    <dialog id="logDialog" class="modal">
+        <form id="logForm" method="dialog">
+            <h2 id="dialogTitle">Новая запись</h2>
+            <input type="hidden" id="logId" name="id">
+
+            <label>
+                Книга
+                <input type="text" id="bookInput" name="book_title"
+                       placeholder="Название книги" required maxlength="255">
+            </label>
+            <label>
+                Всего страниц в книге
+                <input type="number" id="totalPagesInput" name="total_pages"
+                       min="1" required value="300">
+            </label>
+            <label>
+                Страниц прочитано сегодня
+                <input type="number" id="pagesInput" name="pages_read" min="1" required>
+            </label>
+            <label>
+                Дата
+                <input type="date" id="dateInput" name="date" required>
+            </label>
+            <label>
+                Заметки
+                <textarea id="notesInput" name="notes" rows="3" maxlength="1000"></textarea>
+            </label>
+            <div class="modal-actions">
+                <button type="button" id="cancelBtn" class="btn">Отмена</button>
+                <button type="submit" class="btn btn-primary">Сохранить</button>
+            </div>
+        </form>
+    </dialog>
+
+    <script src="js/app.js" defer></script>
+</body>
+</html>

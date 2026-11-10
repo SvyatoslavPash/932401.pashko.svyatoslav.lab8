@@ -1,0 +1,166 @@
+:root {
+    --primary: #2563eb;
+    --bg: #f8fafc;
+    --card: #ffffff;
+    --text: #1e293b;
+    --muted: #64748b;
+    --border: #e2e8f0;
+    --radius: 12px;
+    --danger: #dc2626;
+}
+
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.5;
+}
+
+.header {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.5rem 2rem;
+    background: var(--card);
+    border-bottom: 1px solid var(--border);
+}
+.header h1 { margin: 0; font-size: 1.5rem; }
+
+.btn {
+    padding: 0.6rem 1.2rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--card);
+    color: var(--text);
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background 0.15s;
+}
+.btn:hover { background: #f1f5f9; }
+.btn:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
+.btn-primary { background: var(--primary); color: #fff; border-color: var(--primary); }
+.btn-primary:hover { background: #1d4ed8; }
+
+.tabs { display: flex; gap: 0.5rem; padding: 1rem 2rem 0; }
+.tab {
+    padding: 0.5rem 1.2rem;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    font-size: 1rem;
+    color: var(--muted);
+    border-bottom: 2px solid transparent;
+}
+.tab:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
+.tab.active { border-bottom-color: var(--primary); color: var(--primary); font-weight: 600; }
+
+main { padding: 1.5rem 2rem; max-width: 1200px; margin: 0 auto; }
+.tab-panel { display: none; }
+.tab-panel.active { display: block; }
+
+.logs-list { display: grid; gap: 1rem; }
+.log-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1rem 1.25rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 1rem;
+}
+.log-card h3 { margin: 0 0 0.25rem; font-size: 1.1rem; }
+.log-meta { color: var(--muted); font-size: 0.9rem; margin: 0.25rem 0; }
+.log-actions { display: flex; gap: 0.5rem; align-items: flex-start; }
+.log-actions .btn { padding: 0.4rem 0.8rem; font-size: 0.9rem; }
+
+.progress-list { display: grid; gap: 1rem; margin-bottom: 2rem; }
+.progress-item {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1rem;
+}
+.progress-header {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+    font-size: 0.95rem;
+}
+progress {
+    width: 100%;
+    height: 1rem;
+    border-radius: 999px;
+    overflow: hidden;
+    appearance: none;
+    border: none;
+    background: #e2e8f0;
+}
+progress::-webkit-progress-bar { background: #e2e8f0; border-radius: 999px; }
+progress::-webkit-progress-value { background: var(--primary); border-radius: 999px; transition: width 0.3s; }
+progress::-moz-progress-bar { background: var(--primary); border-radius: 999px; }
+
+.calendar {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 4px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 0.75rem;
+    max-width: 420px;
+}
+.calendar .weekday {
+    text-align: center;
+    font-size: 0.8rem;
+    color: var(--muted);
+    padding: 0.25rem 0;
+}
+.calendar .day {
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    background: #f1f5f9;
+}
+.calendar .day.has-log { background: var(--primary); color: #fff; font-weight: 600; }
+.calendar .day.empty { background: transparent; }
+
+.modal {
+    border: none;
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    width: min(90vw, 480px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+.modal::backdrop { background: rgba(0, 0, 0, 0.45); }
+.modal form { display: grid; gap: 0.75rem; }
+.modal h2 { margin: 0 0 0.5rem; font-size: 1.25rem; }
+.modal label { display: grid; gap: 0.25rem; font-size: 0.95rem; }
+.modal input,
+.modal textarea {
+    padding: 0.5rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font: inherit;
+    width: 100%;
+}
+.modal input:focus,
+.modal textarea:focus { outline: 2px solid var(--primary); outline-offset: 1px; }
+.modal-actions { display: flex; justify-content: flex-end; gap: 0.5rem; margin-top: 0.5rem; }
+
+/* --- Адаптивность --- */
+@media (max-width: 640px) {
+    .header, main, .tabs { padding-left: 1rem; padding-right: 1rem; }
+    .log-card { flex-direction: column; }
+    .log-actions { justify-content: flex-end; }
+}
